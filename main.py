@@ -70,3 +70,11 @@ async def add(request: Request, todo_id: int, db: Session = Depends(get_db)):
     db.delete(todo)
     db.commit()
     return RedirectResponse(url=app.url_path_for("home"), status_code=status.HTTP_303_SEE_OTHER)
+
+@app.get("/face_recog")
+async def face_recog(request: Request):
+    # 비즈니스 로직 넣기
+    return templates.TemplateResponse(
+        "face_recog.html",
+        {"request": request}
+        )
