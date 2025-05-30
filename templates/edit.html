@@ -2,25 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo App</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
-<body>        
-    {% extends 'base.html' %}
-    {% block content %}
+<body>
     <main>
-
-        <h4>나를 성장시키는 메모</h4>
-        <br>
-        <form action="/add" method="post">
-            <textarea name="task" rows="5" placeholder="Enter your task" id="task"></textarea>
-            <button type="submit" id="add_task">
-                Add
-            </button>
+        {% extends 'base.html' %}
+        {% block content %}
+        <form action="/edit/{{todo.id}}" method="post">
+            <textarea name="task" rows="5">{{todo.task}}</textarea>
+            <label for="completed">Done?</label>
+            <input type="checkbox" name="completed" {% if todo.completed %}checked{% endif %}>
+            <button type="submit">Save</button>
         </form>
-            <h2>Tasks</h2>
+
         <div>
             {% for todo in todos %}
                 <div class="task">
@@ -34,9 +30,9 @@
                         <a href="delete/{{ todo.id }}">Delete</a>
                     </small>
                 </div>
-            {% endfor %}          
-        </div> 
+            {% endfor %}
+        </div>
+        {% endblock content %}
     </main>
-    {% endblock content %}
 </body>
 </html>
